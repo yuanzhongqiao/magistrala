@@ -10,184 +10,158 @@
 
 ![banner][banner]
 
-Magistrala is modern, scalable, secure, open-source, and patent-free IoT cloud platform written in Go.
-
-It accepts user and thing (sensor, actuator, application) connections over various network protocols (i.e. HTTP, MQTT, WebSocket, CoAP), thus making a seamless bridge between them. It is used as the IoT middleware for building complex IoT solutions.
-
-For more details, check out the [official documentation][docs].
-
-## Features
-
-- Multi-protocol connectivity and bridging (HTTP, MQTT, WebSocket and CoAP)
-- Device management and provisioning (Zero Touch provisioning)
-- Mutual TLS Authentication (mTLS) using X.509 Certificates
-- Fine-grained access control (policies, ABAC/RBAC)
-- Message persistence (Cassandra, InfluxDB, MongoDB and PostgresSQL)
-- Platform logging and instrumentation support (Prometheus and OpenTelemetry)
-- Event sourcing
-- Container-based deployment using [Docker][docker] and [Kubernetes][kubernetes]
-- [LoRaWAN][lora] network integration
-- [OPC UA][opcua] integration
-- Edge [Agent][agent] and [Export][export] services for remote IoT gateway management and edge computing
-- SDK
-- CLI
-- Small memory footprint and fast execution
-- Domain-driven design architecture, high-quality code and test coverage
-
-## Prerequisites
-
-The following are needed to run Magistrala:
-
-- [Docker](https://docs.docker.com/install/) (version 24.0.7)
-- [Docker compose](https://docs.docker.com/compose/install/) (version 2.24.0)
-
-Developing Magistrala will also require:
-
-- [Go](https://golang.org/doc/install) (version 1.21)
-- [Protobuf](https://github.com/protocolbuffers/protobuf#protocol-compiler-installation) (version 25.1)
-
-## Install
-
-Once the prerequisites are installed, execute the following commands from the project's root:
-
-```bash
-docker compose -f docker/docker-compose.yml --env-file docker/.env --profile nats_nats -p git_github_com_absmach_magistrala_git_  up
-```
-
-This will bring up the Magistrala docker services and interconnect them. This command can also be executed using the project's included Makefile:
-
-```bash
-make run
-```
-
-If you want to run services from specific release checkout code from github and make sure that
-`MG_RELEASE_TAG` in [.env](.env) is being set to match the release version
-
-```bash
-git checkout tags/<release_number> -b <release_number>
-# e.g. `git checkout tags/0.13.0 -b 0.13.0`
-```
-
-Check that `.env` file contains:
-
-```bash
-MG_RELEASE_TAG=<release_number>
-```
-
-> `docker-compose` should be used for development and testing deployments. For production we suggest using [Kubernetes](https://docs.mainflux.io/kubernetes).
-
-## Usage
-
-The quickest way to start using Magistrala is via the CLI. The latest version can be downloaded from the [official releases page][releases].
-
-It can also be built and used from the project's root directory:
-
-```bash
-make cli
-./build/cli version
-```
-
-Additional details on using the CLI can be found in the [CLI documentation](https://docs.mainflux.io/cli).
-
-## Documentation
-
-Official documentation is hosted at [Magistrala official docs page][docs]. Documentation is auto-generated, checkout the instructions on [official docs repository](https://github.com/mainflux/docs):
-
-If you spot an error or a need for corrections, please let us know - or even better: send us a PR.
-
-## Authors
-
-Main architect and BDFL of Magistrala project is [@drasko][drasko].
-
-Additionally, [@nmarcetic][nikola] and [@janko-isidorovic][janko] assured overall architecture and design, while [@manuio][manu] and [@darkodraskovic][darko] helped with crafting initial implementation and continuously worked on the project evolutions.
-
-Besides them, Magistrala is constantly improved and actively developed by [@anovakovic01][alex], [@dusanb94][dusan], [@srados][sava], [@gsaleh][george], [@blokovi][iva], [@chombium][kole], [@mteodor][mirko], [@rodneyosodo][rodneyosodo] and a large set of contributors.
-
-Maintainers are listed in [MAINTAINERS](MAINTAINERS) file.
-
-The Magistrala team would like to give special thanks to [@mijicd][dejan] for his monumental work on designing and implementing a highly improved and optimized version of the platform, and [@malidukica][dusanm] for his effort on implementing the initial user interface.
-
-## Professional Support
-
-There are many companies offering professional support for the Magistrala system.
-
-If you need this kind of support, best is to reach out to [@drasko][drasko] directly, and he will point you out to the best-matching support team.
-
-## Contributing
-
-Thank you for your interest in Magistrala and the desire to contribute!
-
-1. Take a look at our [open issues](https://github.com/absmach/magistrala/issues). The [good-first-issue](https://github.com/absmach/magistrala/labels/good-first-issue) label is specifically for issues that are great for getting started.
-2. Checkout the [contribution guide](CONTRIBUTING.md) to learn more about our style and conventions.
-3. Make your changes compatible to our workflow.
-
-### We're Hiring
-
-You like Magistrala and you would like to make it your day job? We're always looking for talented engineers interested in open-source, IoT and distributed systems. If you recognize yourself, reach out to [@drasko][drasko] - he will contact you back.
-
-> The best way to grab our attention is, of course, by sending PRs :sunglasses:.
-
-## Community
-
-- [Google group][forum]
-- [Gitter][gitter]
-- [Twitter][twitter]
-
-## License
-
-[Apache-2.0](LICENSE)
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmainflux%2Fmainflux.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmainflux%2Fmainflux?ref=badge_large)
-
-## Data Collection for Magistrala
-
-Magistrala is committed to continuously improving its services and ensuring a seamless experience for its users. To achieve this, we collect certain data from your deployments. Rest assured, this data is collected solely for the purpose of enhancing Magistrala and is not used with any malicious intent. The deployment summary can be found on our [website][callhome].
-
-The collected data includes:
-
-- **IP Address** - Used for approximate location information on deployments.
-- **Services Used** - To understand which features are popular and prioritize future developments.
-- **Last Seen Time** - To ensure the stability and availability of Magistrala.
-- **Magistrala Version** - To track the software version and deliver relevant updates.
-
-We take your privacy and data security seriously. All data collected is handled in accordance with our stringent privacy policies and industry best practices.
-
-Data collection is on by default and can be disabled by setting the env variable:
-`MG_SEND_TELEMETRY=false`
-
-By utilizing Magistrala, you actively contribute to its improvement. Together, we can build a more robust and efficient IoT platform. Thank you for your trust in Magistrala!
-
-[banner]: https://github.com/mainflux/docs/blob/master/docs/img/gopherBanner.jpg
-[docs]: https://docs.mainflux.io
-[docker]: https://www.docker.com
-[forum]: https://groups.google.com/forum/#!forum/mainflux
-[gitter]: https://gitter.im/absmach/magistrala?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
-[grc-badge]: https://goreportcard.com/badge/github.com/absmach/magistrala
-[grc-url]: https://goreportcard.com/report/github.com/absmach/magistrala
-[cov-badge]: https://codecov.io/gh/absmach/magistrala/graph/badge.svg?token=SEMDAO3L09
-[cov-url]: https://codecov.io/gh/absmach/magistrala
-[license]: https://img.shields.io/badge/license-Apache%20v2.0-blue.svg
-[twitter]: https://twitter.com/mainflux
-[lora]: https://lora-alliance.org/
-[opcua]: https://opcfoundation.org/about/opc-technologies/opc-ua/
-[agent]: https://github.com/mainflux/agent
-[export]: https://github.com/mainflux/export
-[kubernetes]: https://kubernetes.io/
-[releases]: https://github.com/absmach/magistrala/releases
-[drasko]: https://github.com/drasko
-[nikola]: https://github.com/nmarcetic
-[dejan]: https://github.com/mijicd
-[manu]: https://github.com/manuIO
-[darko]: https://github.com/darkodraskovic
-[janko]: https://github.com/janko-isidorovic
-[alex]: https://github.com/anovakovic01
-[dusan]: https://github.com/dborovcanin
-[sava]: https://github.com/srados
-[george]: https://github.com/gesaleh
-[iva]: https://github.com/blokovi
-[kole]: https://github.com/chombium
-[dusanm]: https://github.com/malidukica
-[mirko]: https://github.com/mteodor
-[rodneyosodo]: https://github.com/rodneyosodo
-[callhome]: https://deployments.mainflux.io
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><h1 tabindex="-1" dir="auto"><a id="user-content-magistrala" class="anchor" aria-hidden="true" tabindex="-1" href="#magistrala"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">玛吉斯特拉拉</font></font></h1>
+<p dir="auto"><a href="https://github.com/absmach/magistrala/actions/workflows/check-license.yaml"><img src="https://github.com/absmach/magistrala/actions/workflows/check-license.yaml/badge.svg?branch=main" alt="检查许可证头" style="max-width: 100%;"></a>
+<a href="https://github.com/absmach/magistrala/actions/workflows/check-generated-files.yml"><img src="https://github.com/absmach/magistrala/actions/workflows/check-generated-files.yml/badge.svg?branch=main" alt="检查生成文件的一致性" style="max-width: 100%;"></a>
+<a href="https://github.com/absmach/magistrala/actions/workflows/build.yml"><img src="https://github.com/absmach/magistrala/actions/workflows/build.yml/badge.svg?branch=main" alt="持续交付" style="max-width: 100%;"></a>
+<a href="https://goreportcard.com/report/github.com/absmach/magistrala" rel="nofollow"><img src="https://camo.githubusercontent.com/940d134fe28bbcd17e932e779bb74914f5668ef5fb505da2c87b7935822abe18/68747470733a2f2f676f7265706f7274636172642e636f6d2f62616467652f6769746875622e636f6d2f6162736d6163682f6d616769737472616c61" alt="去报告卡" data-canonical-src="https://goreportcard.com/badge/github.com/absmach/magistrala" style="max-width: 100%;"></a>
+<a href="https://codecov.io/gh/absmach/magistrala" rel="nofollow"><img src="https://camo.githubusercontent.com/6cd7915bc8c46affe88f55ed4c8c72016269a44fb843bb39f837634424f7234f/68747470733a2f2f636f6465636f762e696f2f67682f6162736d6163682f6d616769737472616c612f67726170682f62616467652e7376673f746f6b656e3d53454d44414f334c3039" alt="覆盖范围" data-canonical-src="https://codecov.io/gh/absmach/magistrala/graph/badge.svg?token=SEMDAO3L09" style="max-width: 100%;"></a>
+<a href="/absmach/magistrala/blob/main/LICENSE"><img src="https://camo.githubusercontent.com/ff9bc5df2e2129a9ad7add8dca20c92a0156be3301d2fd4b8c20687ee2f4689f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d41706163686525323076322e302d626c75652e737667" alt="执照" data-canonical-src="https://img.shields.io/badge/license-Apache%20v2.0-blue.svg" style="max-width: 100%;"></a>
+<a href="https://gitter.im/absmach/magistrala?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge" rel="nofollow"><img src="https://camo.githubusercontent.com/2da7039d862cabe847953554272000b86e80b158a0723c9a832720b935df3f43/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="聊天" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width: 100%;"></a></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer" href="https://github.com/mainflux/docs/blob/master/docs/img/gopherBanner.jpg"><img src="https://github.com/mainflux/docs/raw/master/docs/img/gopherBanner.jpg" alt="横幅" style="max-width: 100%;"></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Magistrala 是用 Go 编写的现代、可扩展、安全、开源且无专利的物联网云平台。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">它接受通过各种网络协议（即 HTTP、MQTT、WebSocket、CoAP）的用户和事物（传感器、执行器、应用程序）连接，从而在它们之间建立无缝桥梁。</font><font style="vertical-align: inherit;">它用作构建复杂物联网解决方案的物联网中间件。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">更多详细信息，请查看</font></font><a href="https://docs.mainflux.io" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">官方文档</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-features" class="anchor" aria-hidden="true" tabindex="-1" href="#features"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特征</font></font></h2>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">多协议连接和桥接（HTTP、MQTT、WebSocket 和 CoAP）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">设备管理和配置（零接触配置）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 X.509 证书的相互 TLS 身份验证 (mTLS)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">细粒度访问控制（策略、ABAC/RBAC）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">消息持久化（Cassandra、InfluxDB、MongoDB 和 PostgresSQL）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">平台日志记录和仪器支持（Prometheus 和 OpenTelemetry）</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">事件溯源</font></font></li>
+<li><font style="vertical-align: inherit;"></font><a href="https://www.docker.com" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用Docker</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font><a href="https://kubernetes.io/" rel="nofollow"><font style="vertical-align: inherit;">Kubernetes</font></a><font style="vertical-align: inherit;">基于容器的部署</font></font><a href="https://kubernetes.io/" rel="nofollow"><font style="vertical-align: inherit;"></font></a></li>
+<li><a href="https://lora-alliance.org/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">LoRaWAN</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网络集成</font></font></li>
+<li><a href="https://opcfoundation.org/about/opc-technologies/opc-ua/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OPC UA</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">集成</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用于远程物联网网关管理和边缘计算的</font><font style="vertical-align: inherit;">边缘</font></font><a href="https://github.com/mainflux/agent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">代理</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://github.com/mainflux/export"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">导出服务</font></font></a><font style="vertical-align: inherit;"></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">软件开发工具包</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行界面</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">内存占用小，执行速度快</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">领域驱动的设计架构、高质量的代码和测试覆盖率</font></font></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-prerequisites" class="anchor" aria-hidden="true" tabindex="-1" href="#prerequisites"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">先决条件</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">运行 Magistrala 需要以下内容：</font></font></p>
+<ul dir="auto">
+<li><a href="https://docs.docker.com/install/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（版本 24.0.7）</font></font></li>
+<li><a href="https://docs.docker.com/compose/install/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker 撰写</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（版本 2.24.0）</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发展 Magistrala 还需要：</font></font></p>
+<ul dir="auto">
+<li><a href="https://golang.org/doc/install" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">去</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（版本1.21）</font></font></li>
+<li><a href="https://github.com/protocolbuffers/protobuf#protocol-compiler-installation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Protobuf</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（版本 25.1）</font></font></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-install" class="anchor" aria-hidden="true" tabindex="-1" href="#install"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装先决条件后，从项目的根目录执行以下命令：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>docker compose -f docker/docker-compose.yml --env-file docker/.env --profile nats_nats -p git_github_com_absmach_magistrala_git_  up</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="docker compose -f docker/docker-compose.yml --env-file docker/.env --profile nats_nats -p git_github_com_absmach_magistrala_git_  up" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">这将启动 Magistrala docker 服务并将它们互连。</font><font style="vertical-align: inherit;">该命令也可以使用项目包含的 Makefile 来执行：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>make run</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="make run" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想从特定版本运行服务，请从 github 签出代码并确保
+</font><a href="/absmach/magistrala/blob/main/.env"><font style="vertical-align: inherit;">.env</font></a></font><code>MG_RELEASE_TAG</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">中</font><font style="vertical-align: inherit;">的设置与发布版本匹配</font></font><a href="/absmach/magistrala/blob/main/.env"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>git checkout tags/<span class="pl-k">&lt;</span>release_number<span class="pl-k">&gt;</span> -b <span class="pl-k">&lt;</span>release_number<span class="pl-k">&gt;</span>
+<span class="pl-c"><span class="pl-c">#</span> e.g. `git checkout tags/0.13.0 -b 0.13.0`</span></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="git checkout tags/<release_number> -b <release_number>
+# e.g. `git checkout tags/0.13.0 -b 0.13.0`" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">检查该</font></font><code>.env</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件包含：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>MG_RELEASE_TAG=<span class="pl-k">&lt;</span>release_number<span class="pl-k">&gt;</span></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="MG_RELEASE_TAG=<release_number>" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<blockquote>
+<p dir="auto"><code>docker-compose</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">应用于开发和测试部署。</font><font style="vertical-align: inherit;">对于生产，我们建议使用</font></font><a href="https://docs.mainflux.io/kubernetes" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Kubernetes</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+</blockquote>
+<h2 tabindex="-1" dir="auto"><a id="user-content-usage" class="anchor" aria-hidden="true" tabindex="-1" href="#usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用法</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开始使用 Magistrala 的最快方法是通过 CLI。</font></font><a href="https://github.com/absmach/magistrala/releases"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最新版本可以从官方发布页面</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载</font><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">它也可以从项目的根目录构建和使用：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>make cli
+./build/cli version</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="make cli
+./build/cli version" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有关使用 CLI 的更多详细信息，请参阅</font></font><a href="https://docs.mainflux.io/cli" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CLI 文档</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-documentation" class="anchor" aria-hidden="true" tabindex="-1" href="#documentation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">官方文档托管在</font></font><a href="https://docs.mainflux.io" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Magistrala 官方文档页面</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font><a href="https://github.com/mainflux/docs"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文档是自动生成的，请查看官方文档存储库</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上的说明</font><font style="vertical-align: inherit;">：</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您发现错误或需要更正，请告诉我们 - 或者更好的是：向我们发送 PR。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-authors" class="anchor" aria-hidden="true" tabindex="-1" href="#authors"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Magistrala 项目的主要架构师和 BDFL 是</font></font><a href="https://github.com/drasko"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@drasko</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此外，</font></font><a href="https://github.com/nmarcetic"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@nmarcetic</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://github.com/janko-isidorovic"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@janko-isidorovic</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保证了整体架构和设计，而</font></font><a href="https://github.com/manuIO"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@manuio</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://github.com/darkodraskovic"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@darkodraskovic</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">帮助制定了初步实施并不断致力于项目的演变。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">除此之外，Magistrala 还得到</font></font><a href="https://github.com/anovakovic01"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@anovakovic01</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/dborovcanin"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@dusanb94</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/srados"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@srados</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/gesaleh"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@gsaleh</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/blokovi"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@blokovi</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/chombium"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@chombium</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/mteodor"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@mteodor</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/rodneyosodo"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@rodneyosodo</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和一大批贡献者的不断改进和积极开发。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">维护者列在</font></font><a href="/absmach/magistrala/blob/main/MAINTAINERS"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">MAINTAINERS</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件中。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Magistrala 团队要特别感谢</font></font><a href="https://github.com/mijicd"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@mijicd</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在设计和实现高度改进和优化的平台版本方面所做的巨大工作，以及</font></font><a href="https://github.com/malidukica"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@malidukica</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在实现初始用户界面方面所做的努力。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-professional-support" class="anchor" aria-hidden="true" tabindex="-1" href="#professional-support"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">专业支持</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有许多公司为 Magistrala 系统提供专业支持。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您需要这种支持，最好直接联系</font></font><a href="https://github.com/drasko"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@drasko</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，他会为您指出最匹配的支持团队。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-contributing" class="anchor" aria-hidden="true" tabindex="-1" href="#contributing"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">贡献</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">感谢您对 Magistrala 的兴趣和做出贡献的愿望！</font></font></p>
+<ol dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">看看我们的</font></font><a href="https://github.com/absmach/magistrala/issues"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未决问题</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">Good </font></font><a href="https://github.com/absmach/magistrala/labels/good-first-issue"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-first Issue</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标签专门针对那些非常适合入门的问题。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看</font></font><a href="/absmach/magistrala/blob/main/CONTRIBUTING.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">贡献指南</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以了解有关我们的风格和惯例的更多信息。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使您的更改与我们的工作流程兼容。</font></font></li>
+</ol>
+<h3 tabindex="-1" dir="auto"><a id="user-content-were-hiring" class="anchor" aria-hidden="true" tabindex="-1" href="#were-hiring"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们正在招聘</font></font></h3>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您喜欢 Magistrala 并且想将其作为您的日常工作吗？</font><font style="vertical-align: inherit;">我们一直在寻找对开源、物联网和分布式系统感兴趣的有才华的工程师。</font><font style="vertical-align: inherit;">如果您认识自己，请联系</font></font><a href="https://github.com/drasko"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@drasko</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> - 他会联系您。</font></font></p>
+<blockquote>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">吸引我们注意力的最好方法当然是发送 PR 😎。</font></font></p>
+</blockquote>
+<h2 tabindex="-1" dir="auto"><a id="user-content-community" class="anchor" aria-hidden="true" tabindex="-1" href="#community"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">社区</font></font></h2>
+<ul dir="auto">
+<li><a href="https://groups.google.com/forum/#!forum/mainflux" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谷歌群组</font></font></a></li>
+<li><a href="https://gitter.im/absmach/magistrala?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">吉特</font></font></a></li>
+<li><a href="https://twitter.com/mainflux" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">推特</font></font></a></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-license" class="anchor" aria-hidden="true" tabindex="-1" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">执照</font></font></h2>
+<p dir="auto"><a href="/absmach/magistrala/blob/main/LICENSE"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">阿帕奇-2.0</font></font></a></p>
+<p dir="auto"><a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fmainflux%2Fmainflux?ref=badge_large" rel="nofollow"><img src="https://camo.githubusercontent.com/7ccbe6caedf558357e04b1ba066fc56ecd7b06d2d9ddd8dc753cf0727cee29c5/68747470733a2f2f6170702e666f7373612e636f6d2f6170692f70726f6a656374732f6769742532426769746875622e636f6d2532466d61696e666c75782532466d61696e666c75782e7376673f747970653d6c61726765" alt="福萨状态" data-canonical-src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmainflux%2Fmainflux.svg?type=large" style="max-width: 100%;"></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-data-collection-for-magistrala" class="anchor" aria-hidden="true" tabindex="-1" href="#data-collection-for-magistrala"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行政长官的数据收集</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Magistrala 致力于不断改进其服务并确保为用户提供无缝体验。</font><font style="vertical-align: inherit;">为了实现这一目标，我们从您的部署中收集某些数据。</font><font style="vertical-align: inherit;">请放心，收集这些数据的目的只是为了增强 Magistrala 的功能，不会出于任何恶意目的使用。</font></font><a href="https://deployments.mainflux.io" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部署摘要可以在我们的网站</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上找到</font><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">收集的数据包括：</font></font></p>
+<ul dir="auto">
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">IP 地址</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- 用于获取有关部署的大致位置信息。</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用的服务</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- 了解哪些功能受欢迎并优先考虑未来的开发。</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上次上线时间</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- 确保 Magistrala 的稳定性和可用性。</font></font></li>
+<li><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Magistrala 版本</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- 跟踪软件版本并提供相关更新。</font></font></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我们认真对待您的隐私和数据安全。</font><font style="vertical-align: inherit;">收集的所有数据均按照我们严格的隐私政策和行业最佳实践进行处理。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">数据收集默认处于开启状态，可以通过设置 env 变量来禁用：
+</font></font><code>MG_SEND_TELEMETRY=false</code></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过使用 Magistrala，您可以积极为其改进做出贡献。</font><font style="vertical-align: inherit;">我们可以共同构建一个更强大、更高效的物联网平台。</font><font style="vertical-align: inherit;">感谢您对马吉斯特拉拉的信任！</font></font></p>
+</article></div>
